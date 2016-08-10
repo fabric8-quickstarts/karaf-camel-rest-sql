@@ -15,8 +15,7 @@
      permissions and limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -32,10 +31,10 @@
     <version.maven-bundle-plugin>2.3.7</version.maven-bundle-plugin>
 
     <!-- configure the versions you want to use here -->
-    <camel.version>2.17.2</camel.version>
+    <camel.version>2.17.3</camel.version>
     <karaf.version>2.4.4</karaf.version>
     <karaf.plugin.version>4.0.3</karaf.plugin.version>
-    <fabric8.version>2.2.145</fabric8.version>
+    <fabric8.version>2.2.148</fabric8.version>
     <derby.version>10.10.2.0</derby.version>
     <spring.features.version>3.0.4</spring.features.version>
     <spring.tx.feature.version>3.2.11.RELEASE_1</spring.tx.feature.version>
@@ -43,7 +42,7 @@
     <docker.from>fabric8/s2i-karaf:1.2</docker.from>
 
     <!-- maven plugin versions -->
-    <fabric8.maven.plugin.version>3.1.4</fabric8.maven.plugin.version>
+    <fabric8.maven.plugin.version>3.1.10</fabric8.maven.plugin.version>
     <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
     <exec-maven-plugin.version>1.4.0</exec-maven-plugin.version>
@@ -272,8 +271,7 @@
                 <assembly>
                   <basedir>/deployments</basedir>
                   <user>jboss:jboss:jboss</user>
-                  <inline xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
-                          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+                  <inline xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2" xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
                     <id>${project.artifactId}</id>
                     <files>
                       <!-- copy karaf archive -->
