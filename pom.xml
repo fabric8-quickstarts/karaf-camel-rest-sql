@@ -32,16 +32,17 @@
     <!-- configure the versions you want to use here -->
     <camel.version>2.17.3</camel.version>
     <karaf.version>2.4.4</karaf.version>
-    <karaf.plugin.version>4.0.5</karaf.plugin.version>
-    <fabric8.version>2.2.150</fabric8.version>
-    <derby.version>10.10.2.0</derby.version>
+    <fabric8.version>2.2.152</fabric8.version>
+    <fabric8.kubernetes.version>1.4.4</fabric8.kubernetes.version>
     <spring.features.version>3.0.4</spring.features.version>
+    <mysql.version>5.1.26</mysql.version>
 
-    <!-- maven plugin versions -->
-    <fabric8.maven.plugin.version>3.1.17</fabric8.maven.plugin.version>
+    <!-- Maven plugin versions -->
+    <fabric8.maven.plugin.version>3.1.12</fabric8.maven.plugin.version>
+    <karaf.maven.plugin.version>4.0.5</karaf.maven.plugin.version>
     <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
-    <version.maven-bundle-plugin>2.3.7</version.maven-bundle-plugin>
+    <maven-bundle-plugin.version>2.3.7</maven-bundle-plugin.version>
     <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
   </properties>
 
@@ -70,11 +71,6 @@
     <!-- Camel -->
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-blueprint</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
       <artifactId>camel-sql</artifactId>
     </dependency>
     <dependency>
@@ -90,11 +86,11 @@
       <artifactId>camel-swagger-java</artifactId>
     </dependency>
 
-    <!-- embedded database -->
+    <!-- MySQL database -->
     <dependency>
-      <groupId>org.apache.derby</groupId>
-      <artifactId>derby</artifactId>
-      <version>${derby.version}</version>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql.version}</version>
     </dependency>
     <dependency>
       <groupId>commons-pool</groupId>
@@ -113,7 +109,7 @@
       and the feature repo itself is not added in etc/org.apache.karaf.features.cfg file -->
       <groupId>org.apache.karaf.features</groupId>
       <artifactId>static</artifactId>
-      <version>${karaf.plugin.version}</version>
+      <version>${karaf.maven.plugin.version}</version>
       <type>kar</type>
       <!-- no need to download kar dependencies -->
       <exclusions>
@@ -131,6 +127,13 @@
       <type>xml</type>
     </dependency>
     <dependency>
+      <groupId>org.apache.camel.karaf</groupId>
+      <artifactId>apache-camel</artifactId>
+      <version>${camel.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
       <groupId>org.apache.karaf.features</groupId>
       <artifactId>spring</artifactId>
       <version>${spring.features.version}</version>
@@ -138,9 +141,16 @@
       <type>xml</type>
     </dependency>
     <dependency>
-      <groupId>org.apache.camel.karaf</groupId>
-      <artifactId>apache-camel</artifactId>
-      <version>${camel.version}</version>
+      <groupId>io.fabric8.kubernetes</groupId>
+      <artifactId>kubernetes-karaf</artifactId>
+      <version>${fabric8.kubernetes.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>fabric8-karaf-features</artifactId>
+      <version>${fabric8.version}</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
@@ -163,14 +173,8 @@
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
-        <version>${version.maven-bundle-plugin}</version>
+        <version>${maven-bundle-plugin.version}</version>
         <extensions>true</extensions>
-        <configuration>
-          <instructions>
-            <!-- dynamic import for the Derby JDBC driver -->
-            <DynamicImport-Package>*</DynamicImport-Package>
-          </instructions>
-        </configuration>
       </plugin>
 
       <!-- plugin goals have to be executed in order -->
@@ -190,12 +194,12 @@
         </executions>
       </plugin>
 
-      <!-- 2. create karaf assembly -->
-      <!-- karaf-maven-plugin creates custom microservice distribution -->
+      <!-- 2. create Karaf assembly -->
+      <!-- karaf-maven-plugin creates custom micro-service distribution -->
       <plugin>
         <groupId>org.apache.karaf.tooling</groupId>
         <artifactId>karaf-maven-plugin</artifactId>
-        <version>${karaf.plugin.version}</version>
+        <version>${karaf.maven.plugin.version}</version>
         <extensions>true</extensions>
         <executions>
           <execution>
@@ -214,7 +218,7 @@
           </execution>
         </executions>
         <configuration>
-          <karafVersion>v4x</karafVersion>
+          <karafVersion>v24</karafVersion>
           <useReferenceUrls>true</useReferenceUrls>
           <archiveTarGz>true</archiveTarGz>
           <archiveZip>false</archiveZip>
@@ -223,12 +227,16 @@
           <startupFeatures>
             <feature>karaf-framework</feature>
             <feature>jaas</feature>
+            <feature>scr</feature>
             <feature>aries-blueprint</feature>
             <feature>camel-blueprint</feature>
             <feature>camel-servlet</feature>
             <feature>camel-sql</feature>
             <feature>camel-jackson</feature>
             <feature>camel-swagger-java</feature>
+            <feature>kubernetes-client</feature>
+            <feature>openshift-client</feature>
+            <feature>fabric8-karaf-blueprint</feature>
           </startupFeatures>
           <startupBundles>
             <bundle>mvn:${project.groupId}/${project.artifactId}/${project.version}</bundle>
@@ -246,7 +254,7 @@
         </configuration>
       </plugin>
 
-      <!-- 3. create docker image -->
+      <!-- 3. create Docker image -->
       <plugin>
         <groupId>io.fabric8</groupId>
         <artifactId>fabric8-maven-plugin</artifactId>
