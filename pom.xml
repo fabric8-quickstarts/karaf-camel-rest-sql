@@ -33,7 +33,7 @@
     <camel.version>2.17.3</camel.version>
     <karaf.version>2.4.4</karaf.version>
     <fabric8.version>2.2.152</fabric8.version>
-    <fabric8.kubernetes.version>1.4.4</fabric8.kubernetes.version>
+    <kubernetes-client.version>1.4.4</kubernetes-client.version>
     <spring.features.version>3.0.4</spring.features.version>
     <mysql.version>5.1.26</mysql.version>
 
@@ -143,7 +143,7 @@
     <dependency>
       <groupId>io.fabric8.kubernetes</groupId>
       <artifactId>kubernetes-karaf</artifactId>
-      <version>${fabric8.kubernetes.version}</version>
+      <version>${kubernetes-client.version}</version>
       <classifier>features</classifier>
       <type>xml</type>
     </dependency>
@@ -241,11 +241,13 @@
           <startupBundles>
             <bundle>mvn:${project.groupId}/${project.artifactId}/${project.version}</bundle>
           </startupBundles>
-          <blacklistedBundles>
-            <bundle>mvn:org.ops4j.pax.logging/pax-logging-api/1.8.4</bundle>
-            <bundle>mvn:org.ops4j.pax.logging/pax-logging-service/1.8.4</bundle>
-          </blacklistedBundles>
-          <blacklistPolicy>Discard</blacklistPolicy>
+          <blacklistedFeatures>
+            <!--
+                 blacklist karaf 4 static feature which includes pax-logging
+                 and staticcm to avoid interferences with karaf v2.4
+            -->
+            <feature>static</feature>
+          </blacklistedFeatures>
           <libraries>
             <library>
               mvn:org.apache.karaf.jaas/org.apache.karaf.jaas.boot/${karaf.version};type:=boot;export:=true;delegate:=true
