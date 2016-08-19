@@ -248,6 +248,7 @@
             -->
             <feature>static</feature>
           </blacklistedFeatures>
+          <blacklistPolicy>Discard</blacklistPolicy>
           <libraries>
             <library>
               mvn:org.apache.karaf.jaas/org.apache.karaf.jaas.boot/${karaf.version};type:=boot;export:=true;delegate:=true
