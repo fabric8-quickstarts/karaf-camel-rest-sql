@@ -31,8 +31,8 @@
 
     <!-- configure the versions you want to use here -->
     <camel.version>2.19.1</camel.version>
-    <karaf.version>4.0.8</karaf.version>
-    <fabric8.version>2.3.2</fabric8.version>
+    <karaf.version>4.2.0.fuse-000090</karaf.version>
+    <fabric8.version>2.3.0.fuse-000030</fabric8.version>
     <spring.features.version>3.0.4</spring.features.version>
     <mysql.version>5.1.26</mysql.version>
 
@@ -219,7 +219,7 @@
             <feature>fabric8-karaf-checks</feature>
           </startupFeatures>
           <startupBundles>
-            <bundle>mvn:${project.groupId}/${project.artifactId}/${project.version};start-level=80</bundle>
+            <bundle>mvn:${project.groupId}/${project.artifactId}/${project.version}</bundle>
           </startupBundles>
           <blacklistedBundles>
             <bundle>camel-karaf-commands;url="mvn:org.apache.camel.karaf/camel-karaf-commands/${camel.version}"</bundle>
