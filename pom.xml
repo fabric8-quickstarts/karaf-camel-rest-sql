@@ -30,12 +30,12 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- configure the versions you want to use here -->
-    <fabric8.version>3.0.8.fuse-000023</fabric8.version>
-    <karaf.plugin.version>4.2.0.fuse-000191</karaf.plugin.version>
+    <fabric8.version>3.0.8.fuse-000023-redhat-2</fabric8.version>
+    <karaf.plugin.version>4.2.0.fuse-000191-redhat-1</karaf.plugin.version>
     <mysql.version>5.1.26</mysql.version>
 
     <!-- Maven plugin versions -->
-    <fabric8.maven.plugin.version>3.5.33.fuse-000023</fabric8.maven.plugin.version>
+    <fabric8.maven.plugin.version>3.5.33.fuse-000023-redhat-2</fabric8.maven.plugin.version>
     <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
     <maven-bundle-plugin.version>2.3.7</maven-bundle-plugin.version>
