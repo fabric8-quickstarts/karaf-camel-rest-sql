@@ -13,8 +13,7 @@ spec:
       nodePort: 0
   selector:
     name: mysql
-  portalIP:
-  type: ClusterIP,
+  type: ClusterIP
   sessionAffinity: None
 ---
 apiVersion: extensions/v1beta1
@@ -24,26 +23,33 @@ metadata:
 spec:
   strategy:
     type: Recreate
+  replicas: 1
   template:
     metadata:
-      name: mysql
+      labels:
+        name: mysql
     spec:
       containers:
-      - image: mysql:5.6
+      - image: mysql:5.7
         name: mysql
         ports:
         - containerPort: 3306
-          protocol: TCP
         env:
         - name : MYSQL_USER
-          value: ${MYSQL_USER}
+          value: user
         - name: MYSQL_PASSWORD
-          value: ${MYSQL_PASSWORD}
+          value: User123
+        - name : MYSQL_ROOT_PASSWORD
+          value: Root123
         - name: MYSQL_DATABASE
-          value: ${MYSQL_DATABASE}
+          value: sampledb
         volumeMounts:
         - name: mysql-data
-          mountPath: /var/lib/mysql/data
+          mountPath: /var/lib/mysql
+        terminationMessagePath: /dev/termination-log
+        securityContext:
+          capabilities:
+          privileged: false
       volumes:
       - name: mysql-data
         emptyDir:
