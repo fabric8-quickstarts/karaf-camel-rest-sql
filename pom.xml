@@ -30,7 +30,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- configure the versions you want to use here -->
-    <fuse.version>7.2.0.fuse-720016-redhat-00002</fuse.version>
+    <fuse.version>7.2.0.fuse-720016-redhat-00003</fuse.version>
 
     <mysql.version>5.1.26</mysql.version>
 
