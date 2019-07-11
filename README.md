@@ -12,13 +12,15 @@ The example can be built with:
 
 This automatically generates the application resource descriptors and builds the Docker image, so it requires access to a Docker daemon, relying on the `DOCKER_HOST` environment variable by default.
 
-### Running the example in Fabric8
+### Running the example in OpenShift
 
-It is assumed a Kubernetes platform is already running. If not, you can find details how to [get started](http://fabric8.io/guide/getStarted/index.html).
+It is assumed that:
+- OpenShift platform is already running, if not you can find details how to [Install OpenShift at your site](https://docs.openshift.com/container-platform/3.3/install_config/index.html).
+- Your system is configured for Fabric8 Maven Workflow, if not you can find a [Get Started Guide](https://access.redhat.com/documentation/en/red-hat-jboss-middleware-for-openshift/3/single/red-hat-jboss-fuse-integration-services-20-for-openshift/)
 
 Besides, it is assumed that a MySQL service is already running on the platform. You can deploy it using the provided deployment by executing:
 
-    $ kubectl create -f mysql-deployment.yml
+    $ oc create -f mysql-deployment.yml
 
 The example can be deployed using a single goal:
 
@@ -26,19 +28,17 @@ The example can be deployed using a single goal:
 
 This deploys the Kubernetes resource descriptors previously generated to the orchestration platform.
 
-When the example runs in Kubernetes, you can use the Kubernetes client tool to inspect the status, e.g.:
+When the example runs in OpenShift, you can use the OpenShift client tool to inspect the status, e.g.:
 
 - To list all the running pods:
     ```
-    $ kubectl get pods
+    $ oc get pods
     ```
 
 - Then find the name of the pod that runs this example, and output the logs from the running pod with:
     ```
-    $ kubectl logs <name of pod>
+    $ oc logs <name of pod>
     ```
-
-You can also use the Fabric8 [Web console](http://fabric8.io/guide/console.html) to manage the running pods, view logs and much more.
 
 ### Accessing the REST service
 
