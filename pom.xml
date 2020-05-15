@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 
      Copyright 2005-2016 Red Hat, Inc.
@@ -21,7 +22,7 @@
 
   <groupId>io.fabric8.quickstarts</groupId>
   <artifactId>karaf-camel-rest-sql</artifactId>
-  <version>1.0.0.fuse-770003</version>
+  <version>1.0.0.fuse-770003-redhat-00001</version>
   <packaging>bundle</packaging>
   <name>Fabric8 :: Quickstarts :: Karaf :: Camel Rest using SQL</name>
   <description>Camel Example using Rest DSL with SQL Database in Karaf container</description>
@@ -31,7 +32,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <!-- configure the versions you want to use here -->
-    <fuse.bom.version>7.7.0.fuse-770005</fuse.bom.version>
+    <fuse.bom.version>7.7.0.fuse-770005-redhat-00001</fuse.bom.version>
 
     <mysql.version>5.1.26</mysql.version>
 
@@ -71,7 +72,7 @@
     <dependency>
       <groupId>commons-pool</groupId>
       <artifactId>commons-pool</artifactId>
-      <version>1.6</version>
+      <version>1.6.0.redhat-10</version>
     </dependency>
     <dependency>
       <groupId>org.apache.servicemix.bundles</groupId>
@@ -191,7 +192,23 @@
           </libraries>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.commonjava.maven.plugins</groupId>
+        <artifactId>project-sources-maven-plugin</artifactId>
+        <version>1.0</version>
+        <executions>
+          <execution>
+            <id>project-sources-archive</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>archive</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
+
+    <pluginManagement></pluginManagement>
 
   </build>
 
@@ -228,50 +245,8 @@
     </profile>
   </profiles>
 
-  <repositories>
-    <repository>
-      <id>redhat-ga-repository</id>
-      <url>https://maven.repository.redhat.com/ga</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>redhat-ea-repository</id>
-      <url>https://maven.repository.redhat.com/earlyaccess/all</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>redhat-ga-repository</id>
-      <url>https://maven.repository.redhat.com/ga</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-    <pluginRepository>
-      <id>redhat-ea-repository</id>
-      <url>https://maven.repository.redhat.com/earlyaccess/all</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
-
 </project>
+<!--
+Modified by POM Manipulation Extension for Maven 3.8.3 ( SHA: 493ca742 ) 
+-->
+
