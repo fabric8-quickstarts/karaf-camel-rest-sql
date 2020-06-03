@@ -16,7 +16,7 @@ spec:
   type: ClusterIP
   sessionAffinity: None
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql
@@ -24,33 +24,37 @@ spec:
   strategy:
     type: Recreate
   replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
   template:
     metadata:
       labels:
         name: mysql
+        app: mysql
     spec:
       containers:
-      - image: mysql:5.7
-        name: mysql
-        ports:
-        - containerPort: 3306
-        env:
-        - name : MYSQL_USER
-          value: user
-        - name: MYSQL_PASSWORD
-          value: User123
-        - name : MYSQL_ROOT_PASSWORD
-          value: Root123
-        - name: MYSQL_DATABASE
-          value: sampledb
-        volumeMounts:
-        - name: mysql-data
-          mountPath: /var/lib/mysql
-        terminationMessagePath: /dev/termination-log
-        securityContext:
-          capabilities:
-          privileged: false
+        - image: mysql:5.7
+          name: mysql
+          ports:
+            - containerPort: 3306
+          env:
+            - name : MYSQL_USER
+              value: user
+            - name: MYSQL_PASSWORD
+              value: User123
+            - name : MYSQL_ROOT_PASSWORD
+              value: Root123
+            - name: MYSQL_DATABASE
+              value: sampledb
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+          terminationMessagePath: /dev/termination-log
+          securityContext:
+            capabilities:
+            privileged: false
       volumes:
-      - name: mysql-data
-        emptyDir:
-          medium:
+        - name: mysql-data
+          emptyDir:
+            medium:
