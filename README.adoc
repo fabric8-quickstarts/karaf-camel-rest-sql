@@ -4,19 +4,17 @@ This example demonstrates how to use SQL via JDBC along with Camel's REST DSL to
 
 This example relies on the https://maven.fabric8.io[Fabric8 Maven plugin] for its build configuration.
 
-IMPORTANT: This quickstart can run in 1 mode: on Kubernetes / OpenShift Cluster
+IMPORTANT: This quickstart can run in 1 mode: on Kubernetese / OpenShift Cluster
 
-== Running the Quickstart on a single-node Kubernetes/OpenShift cluster
+== Running the Quickstart on a single-node Kubernetese/OpenShift cluster
 
 IMPORTANT: You need to run this example on Container Development Kit 3.3 or OpenShift 3.7.
 Both of these products have suitable Fuse images pre-installed.
 If you run it in an environment where those images are not preinstalled follow the steps described in <<single-node-without-preinstalled-images>>.
 
-A single-node Kubernetes/OpenShift cluster provides you with access to a cloud environment that is similar to a production environment.
+A single-node Kubernetese/OpenShift cluster provides you with access to a cloud environment that is similar to a production environment.
 
-If you have a single-node Kubernetes/OpenShift cluster, such as Minishift or the Red Hat Container Development Kit, link:http://appdev.openshift.io/docs/minishift-installation.html[installed and running], you can deploy your quickstart there.
-
-. Download the project and extract the archive on your local filesystem.
+If you have a single-node Kubernetese/OpenShift cluster, such as Minishift or the Red Hat Container Development Kit, link:http://appdev.openshift.io/docs/minishift-installation.html[installed and running], you can deploy your quickstart there.
 
 . Log in to your OpenShift cluster:
 +
@@ -50,25 +48,22 @@ $ oc create -f mysql-deployment.yml
 +
 [source,bash,options="nowrap",subs="attributes+"]
 ----
-$ mvn clean -DskipTests fabric8:deploy -Popenshift
+$ mvn clean -DskipTests oc:deploy -Popenshift
 ----
 
 . In your browser, navigate to the `MY_PROJECT_NAME` project in the OpenShift console.
 Wait until you can see that the pod for the `karaf-camel-rest-sql` has started up.
 
-. On the project's `Overview` page, navigate to the details page deployment of the `karaf-camel-rest-sql` application: `https://OPENSHIFT_IP_ADDR:8443/console/project/MY_PROJECT_NAME/browse/pods/karaf-camel-rest-sql-NUMBER_OF_DEPLOYMENT?tab=details`.
+. On the project's `Overview` page, navigate to the details page deployment of the `karaf-camel-rest-sql` application: `https://OPENSHIFT_IP_ADDR:8443/console/project/MY_PROJECT_NAME/browse/rc/karaf-camel-rest-sql-NUMBER_OF_DEPLOYMENT?tab=details`.
 
 . Switch to tab `Logs` and then see the messages sent by Camel.
 
 [#single-node-without-preinstalled-images]
-=== Running the Quickstart on a single-node Kubernetes/OpenShift cluster without preinstalled images
+=== Running the Quickstart on a single-node Kubernetese/OpenShift cluster without preinstalled images
 
-A single-node Kubernetes/OpenShift cluster provides you with access to a cloud environment that is similar to a production environment.
+A single-node Kubernetese/OpenShift cluster provides you with access to a cloud environment that is similar to a production environment.
 
-If you have a single-node Kubernetes/OpenShift cluster, such as Minishift or the Red Hat Container Development Kit, link:http://appdev.openshift.io/docs/minishift-installation.html[installed and running], you can deploy your quickstart there.
-
-
-. Download the project and extract the archive on your local filesystem.
+If you have a single-node Kubernetese/OpenShift cluster, such as Minishift or the Red Hat Container Development Kit, link:http://appdev.openshift.io/docs/minishift-installation.html[installed and running], you can deploy your quickstart there.
 
 . Log in to your OpenShift cluster:
 +
@@ -84,7 +79,7 @@ $ oc login -u developer -p developer
 $ oc new-project MY_PROJECT_NAME
 ----
 
-. Import base images in your newly created project (MY_PROJECT_NAME) according to https://access.redhat.com/documentation/en-us/red_hat_fuse/7.7/html/fuse_on_openshift_guide/get-started-non-admin[documentation].
+. Import base images in your newly created project (MY_PROJECT_NAME) according to https://access.redhat.com/documentation/en-us/red_hat_fuse/7.9/html/fuse_on_openshift_guide/get-started-non-admin[documentation].
 
 . Change the directory to the folder that contains the extracted quickstart application (for example, `my_openshift/karaf-camel-rest-sql`) :
 +
@@ -104,13 +99,13 @@ $ oc create -f mysql-deployment.yml
 +
 [source,bash,options="nowrap",subs="attributes+"]
 ----
-$ mvn clean -DskipTests fabric8:deploy -Popenshift -Dfabric8.generator.fromMode=istag -Dfabric8.generator.from=MY_PROJECT_NAME/fuse7-karaf-openshift:1.7
+$ mvn clean -DskipTests oc:deploy -Popenshift -Djkube.generator.fromMode=istag -Djkube.generator.from=MY_PROJECT_NAME/fuse-karaf-openshift:1.9
 ----
 
 . In your browser, navigate to the `MY_PROJECT_NAME` project in the OpenShift console.
 Wait until you can see that the pod for the `karaf-camel-rest-sql` has started up.
 
-. On the project's `Overview` page, navigate to the details page deployment of the `karaf-camel-rest-sql` application: `https://OPENSHIFT_IP_ADDR:8443/console/project/MY_PROJECT_NAME/browse/pods/karaf-camel-rest-sql-NUMBER_OF_DEPLOYMENT?tab=details`.
+. On the project's `Overview` page, navigate to the details page deployment of the `karaf-camel-rest-sql` application: `https://OPENSHIFT_IP_ADDR:8443/console/project/MY_PROJECT_NAME/browse/rc/karaf-camel-rest-sql-NUMBER_OF_DEPLOYMENT?tab=details`.
 
 . Switch to tab `Logs` and then see the messages sent by Camel.
 
@@ -142,3 +137,6 @@ The example provides API documentation of the service using Swagger using the _c
 
 You can find more details about running this http://fabric8.io/guide/quickstarts/running.html['quickstart'] on the website. This also includes instructions how to change the Docker image user and registry.
 
+---
+
+Generated by maven plugin - do NOT edit this file! (See https://github.com/jboss-fuse/documentation-template/blob/main/README.md[documentation])

@@ -1,0 +1,5 @@
+= Karaf Camel REST / SQL QuickStart
+
+This example demonstrates how to use SQL via JDBC along with Camel's REST DSL to expose a RESTful API.
+
+This example relies on the https://maven.fabric8.io[Fabric8 Maven plugin] for its build configuration.

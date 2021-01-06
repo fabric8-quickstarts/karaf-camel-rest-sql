@@ -1,0 +1,6 @@
+. It is assumed that a MySQL service is already running on the platform. You can deploy it using the provided deployment by executing in single-node OpenShift cluster:
++
+[source,bash,options="nowrap",subs="attributes+"]
+----
+$ oc create -f mysql-deployment.yml
+----
