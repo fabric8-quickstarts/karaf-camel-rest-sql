@@ -2,7 +2,7 @@
 
 This example demonstrates how to use SQL via JDBC along with Camel's REST DSL to expose a RESTful API.
 
-This example relies on the https://maven.fabric8.io[Fabric8 Maven plugin] for its build configuration.
+This example relies on the https://www.eclipse.org/jkube/docs/openshift-maven-plugin[Openshift Maven plugin] for its build configuration.
 
 IMPORTANT: This quickstart can run in 1 mode: on Kubernetes / OpenShift Cluster
 
@@ -120,7 +120,7 @@ When the example is running, a REST service is available to list the books that 
 
 If you run the example on a single-node OpenShift cluster, then the REST service is exposed at 'http://karaf-camel-rest-sql-MY_PROJECT_NAME.OPENSHIFT_IP_ADDR.nip.io/camel-rest-sql/`.
 
-Notice: As it depends on your OpenShift setup, the hostname (route) might vary. Verify with `oc get routes` which hostname is valid for you. Add the `-Dfabric8.deploy.createExternalUrls=true` option to your Maven commands if you want it to deploy a Route configuration for the service.
+Notice: As it depends on your OpenShift setup, the hostname (route) might vary. Verify with `oc get routes` which hostname is valid for you.
 
 The actual endpoint is using the _context-path_ `camel-rest-sql/books` and the REST service provides two services:
 
@@ -137,8 +137,4 @@ You can then access these services from your Web browser, e.g.:
 == Swagger API
 
 The example provides API documentation of the service using Swagger using the _context-path_ `camel-rest-sql/api-doc`. You can access the API documentation from your Web browser at <http://karaf-camel-rest-sql-MY_PROJECT_NAME.OPENSHIFT_IP_ADDR.nip.io/camel-rest-sql/api-doc>.
-
-== More details
-
-You can find more details about running this http://fabric8.io/guide/quickstarts/running.html['quickstart'] on the website. This also includes instructions how to change the Docker image user and registry.
 
