@@ -33,7 +33,7 @@
     <camel.version>2.21.2</camel.version>
     <karaf.version>4.0.8</karaf.version>
     <fabric8.version>2.3.7</fabric8.version>
-    <mysql.version>5.1.26</mysql.version>
+    <mysql.version>8.0.28</mysql.version>
 
     <!-- Maven plugin versions -->
     <fabric8.maven.plugin.version>3.5.40</fabric8.maven.plugin.version>
